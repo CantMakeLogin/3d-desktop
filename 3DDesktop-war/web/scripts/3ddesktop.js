@@ -206,7 +206,23 @@ function init(){
   renderer.setClearColor( 0x90ff90 );
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild(renderer.domElement);
-
+//
+var materials = [
+					new THREE.MeshBasicMaterial( { color: 0xE01B4C }), // правая сторона
+					new THREE.MeshBasicMaterial( { color: 0x34609E }), // левая сторона
+					new THREE.MeshBasicMaterial( { color: 0x7CAD18 }), //верх
+					new THREE.MeshBasicMaterial( { color: 0x00EDB2 }), // низ
+					new THREE.MeshBasicMaterial( { color: 0xED7700 }), // лицевая сторона
+					new THREE.MeshBasicMaterial( { color: 0xB5B1AE }) // задняя сторона
+				];
+				var materialsDoor = [
+					new THREE.MeshBasicMaterial( { color: 0xd3d3d3 }), // правая сторона
+					new THREE.MeshBasicMaterial( { color: 0xd3d3d3 }), // левая сторона
+					new THREE.MeshBasicMaterial( { color: 0xd3d3d3 }), //верх
+					new THREE.MeshBasicMaterial( { color: 0xd3d3d3 }), // низ
+					new THREE.MeshBasicMaterial( { color: 0xd3d3d3 }), // лицевая сторона
+					new THREE.MeshBasicMaterial( { color: 0xd3d3d3 }) // задняя сторона
+				];
   //floor
     var floorGeo = new THREE.BoxGeometry( 700, 5, 700 );
     var floorMat = new THREE.MeshBasicMaterial( { color: 0x6615ff } );
@@ -257,7 +273,60 @@ function init(){
     newPaper.position.y = -7;
     newPaper.userData.id = 1; // FUNCTION ID
     scene.add(newPaper);
-
+			// Walls
+				var cube = new THREE.BoxGeometry( 40, 500, 740, materials );
+				var Wall1 = new THREE.Mesh( cube, new THREE.MeshFaceMaterial(materials) );
+				Wall1.position.y = 50;
+				Wall1.position.x = -350;
+				Wall1.position.z = 0;
+				scene.add(Wall1);
+				var cube = new THREE.BoxGeometry( 700, 500, 40, materials );
+				var Wall2 = new THREE.Mesh( cube, new THREE.MeshFaceMaterial(materials) );
+				Wall2.position.y = 50;
+				Wall2.position.x = 0;
+				Wall2.position.z = -350;
+				scene.add(Wall2);
+				var cube = new THREE.BoxGeometry( 700, 500, 40, materials );
+				var Wall3 = new THREE.Mesh( cube, new THREE.MeshFaceMaterial(materials) );
+				Wall3.position.y = 50;
+				Wall3.position.x = 0;
+				Wall3.position.z = 350;
+				scene.add(Wall3);
+				var cube = new THREE.BoxGeometry( 40, 500, 240, materials );
+				var Wall4 = new THREE.Mesh( cube, new THREE.MeshFaceMaterial(materials) );
+				Wall4.position.y = 50;
+				Wall4.position.x = 350;
+				Wall4.position.z = -250;
+				scene.add(Wall4);
+				var cube = new THREE.BoxGeometry( 40, 500, 240, materials );
+				var Wall5 = new THREE.Mesh( cube, new THREE.MeshFaceMaterial(materials) );
+				Wall5.position.y = 50;
+				Wall5.position.x = 350;
+				Wall5.position.z = 250;
+				scene.add(Wall5);
+				var cube = new THREE.BoxGeometry( 40, 100, 260, materials );
+				var Wall6 = new THREE.Mesh( cube, new THREE.MeshFaceMaterial(materials) );
+				Wall6.position.y = 250;
+				Wall6.position.x = 350;
+				Wall6.position.z = 0;
+				scene.add(Wall6);
+				// Door
+				var cube = new THREE.BoxGeometry( 20, 400, 260, materialsDoor );
+				var Door = new THREE.Mesh( cube, new THREE.MeshFaceMaterial(materialsDoor) );
+				Door.position.y = 00;
+				Door.position.x = 350;
+				Door.position.z = 0;
+				scene.add(Door);
+				//
+				var Doorknob1 = new THREE.Mesh( new THREE.CylinderGeometry( 15, 05, 10, 90, 10 ), new THREE.MeshBasicMaterial( { color: 0x357574 }) );
+				Doorknob1.rotation.z = Math.PI / 2;
+				Doorknob1.position.set(335, 60, 70);
+				scene.add(Doorknob1);
+				var Doorknob2 = new THREE.Mesh( new THREE.CylinderGeometry( 15, 05, 10, 90, 10 ), new THREE.MeshBasicMaterial( { color: 0x357574 }) );
+				Doorknob2.rotation.z = 3*Math.PI / 2;
+				Doorknob2.position.set(365, 60, 70);
+				scene.add(Doorknob2);
+				//
     raycaster = new THREE.Raycaster();
 
     var onKeyDown = function ( event ) {
